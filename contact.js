@@ -26,6 +26,18 @@ const cekFile = async() =>{
     }
 }
 
+const changeData = (name,email,mobile) =>{
+    // Load Contact Data
+    const contact =  {name,email, mobile}
+    const file = fs.readFileSync('data/contacts.json', 'utf-8')
+    const contacts = JSON.parse(file)
+    
+   
+    // Store data to JSON file if all input is valid
+    contacts.push(contact)
+    fs.writeFileSync(dataPath, JSON.stringify(contacts))
+    console.log("Success input data!")
+}
 // Function dave data JSON berdasarkan input  
 const saveData = (name,email,mobile) =>{
     // Load Contact Data
@@ -168,7 +180,7 @@ const updateUser = (name, newName, email, mobile) => {
         console.log(updateUser.mobile)
         console.log(updateUser.email)
         deleteUser(name)
-        saveData(updateUser.name, updateUser.email, updateUser.mobile)       
+        changeData(updateUser.name, updateUser.email, updateUser.mobile)       
 
         }else{
         console.log('User not found')
